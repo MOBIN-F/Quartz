@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Job-->
+   <bean id="MyJobTask" class="com.mobin.spring.quartz.MytaskJob"/>
+
+    <!-- jobDetail-->
+    <bean id="jobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+           <property name="targetObject" ref="MyJobTask"/>
+           <property name="targetMethod" value="doIt"/>
+        <!-- 不并发执行，这样当前一个Job在下一个job开始时都还没结束时，第二个Job不会执行 -->
+           <property name="concurrent" value="false"/>
+    </bean>
+
+    <bean id="simpleTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+           <property name="jobDetail" ref="jobDetail"/>
+        <!-- 5秒后触发-->
+           <property name="startDelay" value="5000"/>
+        <!--每隔2秒触发一次 -->
+           <property name="repeatInterval" value="2000"/>
+    </bean>
+
+    <!-- 定义调度器-->
+    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+          <property name="triggers" ref="simpleTrigger"/>
+    </bean>
+
+
+    </beans>
