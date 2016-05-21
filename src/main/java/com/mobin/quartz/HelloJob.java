@@ -9,7 +9,7 @@ import org.quartz.*;
 public class HelloJob implements Job {
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
         JobKey key = jobExecutionContext.getJobDetail().getKey();
-
+//quartz
         JobDataMap dataMap = jobExecutionContext.getJobDetail().getJobDataMap();
 
         System.out.println("The key is  "+key+"  ,and name is  "+dataMap.getString("name")+" and age is  "+dataMap.getInt("age"));
