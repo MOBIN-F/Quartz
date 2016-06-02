@@ -22,7 +22,7 @@ public class MyJobSetter implements Job{
 
         JobDataMap dataMap = context.getMergedJobDataMap();
 
-        System.out.println("Instance  "+key+"  of name   " +name+"  of age "+age );
+        System.out.println("Instance  " + key + "  of name   "  + name + "  of age " + age );
     }
 
 
